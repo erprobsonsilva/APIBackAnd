@@ -1,0 +1,48 @@
+// Dependencia e plugins para o projeto
+plugins {
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.silvas-desenvolvimento'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	// repositorion onde baixamos os jar de bibliotecas externas -> https://mvnrepository.com/
+	mavenCentral()
+}
+
+dependencies {
+	// Definicoes das dependencias. "bibliotecas java 'jar'"
+	// examplos
+	// implementation 'com.silvas.desenvolvimento:nome.projeto:1.0.0.SNAPSHOT'
+	// implementation group: 'com.silvas.desenvolvimento', name: 'nome.projeto', version: '1.0.0.SNAPSHOT'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'com.oracle.database.jdbc', name: 'ojdbc11', version: '21.1.0.0'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	compile 'org.mapstruct:mapstruct:1.3.1.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.3.1.Final'
+
+	compile 'com.h2database:h2:1.4.197'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
